@@ -88,7 +88,7 @@ function mainMenu() {
                 ],
             },
         ])
-        .then((answers) => {
+        .then((answers: any) => {
             switch (answers.action) {
                 case "Add Task":
                     addTask();
