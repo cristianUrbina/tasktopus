@@ -12,6 +12,7 @@ jest.mock("../storage", () => {
 
 describe("task manager", () => {
   let taskManager: TaskManager;
+
   beforeEach(() => {
     taskManager = new TaskManager();
   });
@@ -22,6 +23,7 @@ describe("task manager", () => {
 
   describe("tasks alterations", () => {
     let task: Task;
+
     beforeEach(() => {
       task = new Task(2, "my task 2", ["a step for task 2 here"], 1, [
         "some note here",
@@ -38,16 +40,33 @@ describe("task manager", () => {
       expect(taskManager.tasks).not.toContain(task);
     });
 
-    test("update task", () => {
-      const updatedTask = new Task(
-        task.id,
-        "Updated task",
-        ["step 1", "step 2"],
-        2,
-        ["note 1", "note 2"],
-      );
-      taskManager.updateTaskById(task.id, updatedTask);
-      expect(taskManager.tasks).toContainEqual(updatedTask);
+    describe("update", () => {
+      let updatedTask: Task;
+
+      beforeEach(() => {
+        updatedTask = new Task(
+          task.id,
+          "Updated task",
+          ["step 1", "step 2"],
+          2,
+          ["note 1", "note 2"],
+        );
+      });
+
+      test("update task", () => {
+        const result = taskManager.updateTaskById(task.id, updatedTask);
+        expect(result).toBe(task);
+        expect(taskManager.tasks).toContainEqual(updatedTask);
+      });
+
+      test("update non existent task", () => {
+        const invalidId = 9999;
+        updatedTask.id = invalidId;
+        expect(() =>
+          taskManager.updateTaskById(invalidId, updatedTask),
+        ).toThrow("Task id not found");
+        expect(taskManager.tasks).not.toContainEqual(updatedTask);
+      });
     });
   });
 });

@@ -19,11 +19,12 @@ export class TaskManager {
     updateTaskById(id: number, updatedTask: Task) {
         const task: Task | undefined = this.tasks.find((t) => t.id === id);
         if (task) {
+            console.log(task);
             const {id, ...taskWithoutId } = updatedTask;
             Object.assign(task, taskWithoutId);
             return task;
         }
-        return null;
+        throw new Error("Task id not found");
     }
     // listTasks() {
     //     this.tasks.forEach((task, index) => {
