@@ -2,24 +2,24 @@ import Task from "./Task.js";
 import { saveTasks, loadTasks } from "./storage.js";
 
 export class TaskManager {
-    tasks: Array<Task>;
+    tasks: Map<number, Task>;
     constructor() {
-        this.tasks = loadTasks();
+        const taskList: Array<Task> = loadTasks();
+        this.tasks = new Map(taskList.map(t => [t.id, t]));
     }
 
     addTask(task: Task) {
-        this.tasks.push(task);
+        this.tasks.set(task.id, task);
         saveTasks(this.tasks);
     }
 
     removeTaskById(id: number) {
-        this.tasks = this.tasks.filter((t) => t.id !== id);
+        this.tasks.delete(id);
     }
 
     updateTaskById(id: number, updatedTask: Task) {
-        const task: Task | undefined = this.tasks.find((t) => t.id === id);
+        const task: Task | undefined = this.tasks.get(id);
         if (task) {
-            console.log(task);
             const {id, ...taskWithoutId } = updatedTask;
             Object.assign(task, taskWithoutId);
             return task;

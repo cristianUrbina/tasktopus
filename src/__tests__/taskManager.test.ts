@@ -3,9 +3,7 @@ import Task from "../Task";
 
 jest.mock("../storage", () => {
   return {
-    loadTasks: () => [
-      new Task(1, "my task", ["a step here"], 1, ["some note here"]),
-    ],
+    loadTasks: () => [new Task(1, "my task", ["a step here"], 1, ["some note here"])],
     saveTasks: () => { },
   };
 });
@@ -18,7 +16,7 @@ describe("task manager", () => {
   });
 
   test("load tasks", () => {
-    expect(taskManager.tasks).toHaveLength(1);
+    expect(taskManager.tasks.size).toBe(1);
   });
 
   describe("tasks alterations", () => {
@@ -32,12 +30,12 @@ describe("task manager", () => {
     });
 
     test("add task", () => {
-      expect(taskManager.tasks).toContain(task);
+      expect(taskManager.tasks.get(task.id)).toBe(task);
     });
 
     test("remove task", () => {
       taskManager.removeTaskById(task.id);
-      expect(taskManager.tasks).not.toContain(task);
+      expect(taskManager.tasks.get(task.id)).toBeUndefined();
     });
 
     describe("update", () => {
@@ -56,7 +54,7 @@ describe("task manager", () => {
       test("update task", () => {
         const result = taskManager.updateTaskById(task.id, updatedTask);
         expect(result).toBe(task);
-        expect(taskManager.tasks).toContainEqual(updatedTask);
+        expect(taskManager.tasks.get(task.id)).toEqual(updatedTask);
       });
 
       test("update non existent task", () => {
