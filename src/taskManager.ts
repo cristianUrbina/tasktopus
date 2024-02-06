@@ -12,9 +12,9 @@ export class TaskManager {
         saveTasks(this.tasks);
     }
 
-    // removeTaskById(id: number) {
-    //     // this.tasks = this.tasks.filter((t) => t.id !== id);
-    // }
+    removeTaskById(id: number) {
+        this.tasks = this.tasks.filter((t) => t.id !== id);
+    }
 
     // listTasks() {
     //     this.tasks.forEach((task, index) => {

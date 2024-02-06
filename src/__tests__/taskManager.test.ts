@@ -27,4 +27,13 @@ describe("task manager", () => {
     taskManager.addTask(task);
     expect(taskManager.tasks[1]).toBe(task);
   });
+
+  test("remove task", () => {
+    const task = new Task(2, "my task 2", ["a step for task 2 here"], 1, [
+      "some note here",
+    ]);
+    taskManager.addTask(task);
+    taskManager.removeTaskById(task.id);
+    expect(taskManager.tasks).not.toContain(task);
+  });
 });
