@@ -37,9 +37,17 @@ describe("task manager", () => {
       taskManager.removeTaskById(task.id);
       expect(taskManager.tasks).not.toContain(task);
     });
-  });
 
-  describe("update task", () => {
-
+    test("update task", () => {
+      const updatedTask = new Task(
+        task.id,
+        "Updated task",
+        ["step 1", "step 2"],
+        2,
+        ["note 1", "note 2"],
+      );
+      taskManager.updateTaskById(task.id, updatedTask);
+      expect(taskManager.tasks).toContainEqual(updatedTask);
+    });
   });
 });

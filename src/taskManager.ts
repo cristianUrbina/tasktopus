@@ -16,6 +16,13 @@ export class TaskManager {
         this.tasks = this.tasks.filter((t) => t.id !== id);
     }
 
+    updateTaskById(id: number, updatedTask: Task) {
+        const task: Task | undefined = this.tasks.find((t) => t.id === id);
+        if (task) {
+            Object.assign(task, updatedTask);
+        }
+        return;
+    }
     // listTasks() {
     //     this.tasks.forEach((task, index) => {
     //         console.log(
