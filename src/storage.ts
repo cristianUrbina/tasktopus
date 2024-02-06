@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import { URL } from 'url';
 
-const __dirname = new URL('.', import.meta.url).pathname;
-const dataPath = path.join(__dirname, 'tasks.json');
+const dirname = new URL('.', import.meta.url).pathname;
+const dataPath = path.join(dirname, 'tasks.json');
 
-function saveTasks(tasks) {
+function saveTasks(tasks: any) {
     fs.writeFileSync(dataPath, JSON.stringify(tasks, null, 2));
 }
 

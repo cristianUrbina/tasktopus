@@ -5,8 +5,7 @@ export class TaskManager {
         this.tasks = loadTasks();
     }
 
-    addTask(name) {
-        const task = { name, steps: [], currentStep: 0, notes: [] };
+    addTask(task) {
         this.tasks.push(task);
         saveTasks(this.tasks);
     }
