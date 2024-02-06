@@ -1,6 +1,6 @@
 import { saveTasks, loadTasks } from "./storage.js";
 
-class TaskManager {
+export class TaskManager {
     constructor() {
         this.tasks = loadTasks();
     }
@@ -54,5 +54,3 @@ class TaskManager {
         }
     }
 }
-
-export default TaskManager;

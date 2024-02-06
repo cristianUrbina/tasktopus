@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import TaskManager from "./taskManager.js";
+import { TaskManager } from "./taskManager.js";
 import chalk from "chalk";
 
 const taskManager = new TaskManager();
@@ -13,7 +13,7 @@ function addTask() {
                 message: "Enter the task name:",
             },
         ])
-        .then((answer) => {
+        .then((answer: any) => {
             taskManager.addTask(answer.taskName);
             console.log(chalk.green("Task added successfully!"));
             mainMenu(); // Return to the main menu
