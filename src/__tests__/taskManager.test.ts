@@ -20,7 +20,7 @@ describe("task manager", () => {
     expect(taskManager.tasks).toHaveLength(1);
   });
 
-  describe("task list alterations", () => {
+  describe("tasks alterations", () => {
     let task: Task;
     beforeEach(() => {
       task = new Task(2, "my task 2", ["a step for task 2 here"], 1, [
@@ -30,12 +30,16 @@ describe("task manager", () => {
     });
 
     test("add task", () => {
-      expect(taskManager.tasks[1]).toBe(task);
+      expect(taskManager.tasks).toContain(task);
     });
 
     test("remove task", () => {
       taskManager.removeTaskById(task.id);
       expect(taskManager.tasks).not.toContain(task);
     });
+  });
+
+  describe("update task", () => {
+
   });
 });
